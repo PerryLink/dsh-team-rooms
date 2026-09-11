@@ -48,16 +48,28 @@ jobs:
       - name: Publish to npm
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           version="$(node -p "require('./package.json').version")"
-          if [ -z "$NPM_TOKEN" ]; then
+          # Do NOT read the token through setup-node's `${NODE_AUTH_TOKEN}`
+          # expansion. The family's first release died that way with
+          # `*** is not a legal HTTP header value`, AFTER the provenance
+          # statement had been signed. The secret was measured to carry NO
+          # CR/LF, so the trailing-newline hypothesis is disproven and the
+          # mechanism is not established; what IS established is that the
+          # env-expanded path failed and writing the userconfig directly
+          # publishes. The same fix is in dsh-plugin-upgrade-015's workflow.
+          raw_breaks="no"
+          case "$NPM_TOKEN" in *$'\n'*|*$'\r'*) raw_breaks="yes" ;; esac
+          token="$(printf '%s' "$NPM_TOKEN" | tr -d '\r\n')"
+          echo "NPM_TOKEN secret contains line breaks: ${raw_breaks}"
+          if [ -z "$token" ]; then
             echo "NPM_TOKEN secret is not set; skipping npm publish"
             exit 0
           fi
           if npm view "dsh-team-rooms@${version}" version >/dev/null 2>&1; then
             echo "dsh-team-rooms@${version} is already published; skipping npm publish"
           else
+            printf '//registry.npmjs.org/:_authToken=%s\n' "$token" > "${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
             npm publish --provenance --access public
           fi
 
