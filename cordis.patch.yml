@@ -1,0 +1,34 @@
+# dsh-team-rooms bundle patch: mount the persistent team-room plugin.
+#
+# Rooms persist through the harness's storage domain (SQLite or JSONL backend
+# — the deployment chooses; zero extra services). Every shipped profile
+# (web/headless/sdk/acp) composes the storage stack (storage + storage-json +
+# storage-domain) through the dsh-base bundle, so the patch must NOT insert
+# those rows again: a same-id insert makes the profile refuse to boot
+# (`duplicate loader entry id: storage`). The patch mounts only the plugin row;
+# a bare profile without dsh-base composes the storage stack itself, and until
+# it does the room_* tools plus the /room command stay dormant.
+#
+# There is deliberately NO `provider` key here: that key belongs to
+# dsh-background-agents (it named the subagent provider its `background_agent`
+# tool started children with), and team rooms never spawn a subagent. Rooms
+# deliver through the official agent inbox instead.
+#
+# Configure the room limits per profile by overriding the `team-rooms` row.
+#
+# Install (lib/ is committed, so no build step or allowBuilds is needed):
+#   dsh plugin --profile <name> add "github:PerryLink/dsh-team-rooms#v1.0.0"
+- insert:
+    - id: team-rooms
+      name: dsh-team-rooms
+      config:
+        # ── room policy (schema defaults shown for reference) ──────────────
+        # maxRooms: 16            # hard cap on rooms across the profile
+        # maxMembersPerRoom: 8    # hard cap on members per room
+        # maxRoomsPerMember: 4    # hard cap on rooms one session may join
+        # busRetention: 200       # bus messages kept per room (retention window)
+        # timelineRetention: 500  # timeline events kept per room
+        # taskRetention: 50       # completed tasks kept per room
+        # maxMessageChars: 4000   # hard cap on one message's text
+        # injectRoomBrief: true   # one-line role statement brief on join/resume
+        # roomOpenTimeoutMs: 15000 # store-open deadline before store-unavailable

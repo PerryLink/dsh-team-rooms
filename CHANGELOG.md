@@ -1,0 +1,43 @@
+# Changelog
+
+All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] — 2026-09-11
+
+### Added
+
+- **The plugin, extracted.** `dsh-team-rooms` is the team-room half of `dsh-background-agents` 0.9.6 as a standalone package: the `/room` command family, eight `room_*` tools, the `RoomHub` write chain, the delivery cursors, the `teamRoom` session projection, the cross-ecosystem stdio inbound bridge, and the Team Rooms Web settings page. The background-agent half (`background_agent` and the five `bg_*` tools) stays behind — DSH's native continuable subagents cover it.
+- `ARCHITECTURE.md` now documents the room hub, the single write chain, the delivery cursors, the `teamRoom` fold, and the inbound bridge. In `dsh-background-agents` that design existed only in source docstrings.
+- `tests/room-projection.spec.ts` covers the `teamRoom` fold (17 cases) — `src/room/projection.ts` was entirely untested in the source package.
+- `tests/room-presenter.spec.ts` and `tests/team-rooms-section.spec.tsx` cover the client half (the pure presenter and a jsdom render of the settings section) — neither had any test in the source package.
+
+### Changed
+
+- **Package identity**: npm name, the `dsh.bundle.patch` row name, `PLUGIN_ID` in `tsdown.config.ts`, the `window.__ModuleLoader__.load({ id })` stamp, the logger channel, and the `data-plugin`/`data-plugin-css` CSS tags are all `dsh-team-rooms`. The client bundle is served from `/plugins/dsh-team-rooms/client.js`.
+- **`inject`** is now `['tools', 'agents', 'sessions']` — the subagent runtime is gone. No room operation spawns a child agent, so the package declares no `dsh-subagent` dependency and drops the `subagent:spawn` workshop permission.
+- **`cordis.patch.yml`** inserts one row with the room-policy keys and **no `provider`** key: that key named the subagent provider the background-agent half started children with.
+- **`dsh.client.inject`** drops `@deepseek-ai/dsh-client-ui-sidebar` and `@deepseek-ai/dsh-client-ui-primitives` (both belonged to the removed sidebar panel) and now lists `@deepseek-ai/dsh-client-ui-settings` — `TeamRoomsSection.tsx` has always imported its types, but the manifest never declared the edge.
+- **`@deepseek-ai/dsh-session-projection` is declared** in `peerDependencies` and `devDependencies`. `src/room/projection.ts` imports it, and `dsh-background-agents` declared it in no dependency block at all.
+- The client half registers **only** the `settings.section` page; the source's single client entry served two slots from one bundle.
+- `tsconfig.json` excludes the two client-side test files from the node program (they belong to `tsconfig.client.json`), and both client configs list `src/room/schema.ts` explicitly, which the source configuration relied on `tsconfig.json`'s `src` include to reach implicitly.
+- The five READMEs now document **eight** `room_*` tools. The source `README.md` surface table listed seven and omitted `room_read`.
+- `src/facts.ts` narrows `FactEventType` to `'team-room/fact'` and its header names only the room fact channel; the host gating itself is unchanged.
+
+### Fixed
+
+- Five mojibake sequences in the moved sources (U+9205 where an em dash was intended, in `src/facts.ts` and `src/room/hub.ts`) are written as plain hyphens.
+
+### Preserved (do not change)
+
+These strings are byte-identical to `dsh-background-agents` 0.9.6 so existing user data keeps working. Changing any of them silently orphans stored rooms, existing session logs, or the settings page:
+
+- the storage domain name `team_rooms` (`src/room/domain.ts`)
+- the projection key `teamRoom` (`src/room/projection.ts`)
+- the session event type `team-room/fact` (`src/room/events.ts`)
+- the client slot id `team-rooms` (`src/client/index.ts`)
+
+`PLUGIN` (`src/vocabulary.ts`) also keeps the 0.9.6 literal `'dsh-background-agents'` even though the package is renamed: it is the producer tag already written into stored `presentationMeta` blocks, and nothing parses it across packages, so one logical producer stays under one string. Revisit only with a deliberate data-migration decision.
+
+### Deprecated
+
+- `dsh-background-agents` remains published and mounts as before; it is not removed by this release. Do not mount both packages' room halves at once — they would register the same tools, the same `/room` command, the same `teamRoom` projection, and the same `team-rooms` settings slot.
