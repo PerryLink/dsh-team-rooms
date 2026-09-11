@@ -198,7 +198,7 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [37 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [36 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
 
 | 插件 | 一句话 |
 |---|---|
@@ -237,7 +237,6 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | DeepSeek Harness 插件的隔离安装与冒烟测试驱动 | |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/滴答清单任务桥：会话头部面板 + 11 个工具 | |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | DeepSeek Harness 的厂商参数翻译与确定性 JSON 修复 | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | 微信 ↔ DSH 桥（腾讯 iLink bot）：文本/图片/文件/语音，聊天内审批 |
 
 ### 从 DSH Desktop 市场安装
 

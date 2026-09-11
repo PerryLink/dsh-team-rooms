@@ -198,7 +198,7 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [37 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [36 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
 
 | प्लगइन | एक पंक्ति |
 |---|---|
@@ -237,7 +237,6 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | DeepSeek Harness प्लगइन के लिए पृथक इंस्टॉल-�और-स्मोक टेस्ट ड्राइव | |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 कार्य ब्रिज: सेशन-हेडर पैनल + 11 टूल | |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | DeepSeek Harness के लिए विक्रेता पैरामीटर अनुवाद और नियतात्मक JSON मरम्मत | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH ब्रिज (Tencent iLink bot): टेक्स्ट/छवि/फ़ाइल/वॉइस, चैट में अनुमोदन |
 
 ### DSH Desktop मार्केट से इंस्टॉल करें
 

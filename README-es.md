@@ -198,7 +198,7 @@ pnpm run gen-aliases  # vuelve a mapear las rutas del harness si el checkout se 
 
 ## Familia de plugins DSH de PerryLink
 
-Este proyecto es uno de los [37 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, los otros probablemente también:
+Este proyecto es uno de los [36 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, los otros probablemente también:
 
 | Plugin | Una línea |
 |---|---|
@@ -237,7 +237,6 @@ Este proyecto es uno de los [37 plugins de DeepSeek Harness](https://github.com/
 | **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | Pruebas aisladas de instalación y smoke para plugins de DeepSeek Harness | |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | Puente de tareas TickTick/Dida365: panel en la cabecera de sesión + 11 herramientas | |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | Traducción de parámetros de proveedor y reparación determinista de JSON para DeepSeek Harness | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | Puente WeChat ↔ DSH (bot Tencent iLink): texto/imagen/archivo/voz, aprobaciones en el chat |
 
 ### Instalar desde el mercado de DSH Desktop
 
