@@ -105,22 +105,32 @@ function button(text: string): HTMLButtonElement {
   return found
 }
 
-/**
- * Fill one input the way React reads a controlled field: through the native
+/** Fill one input the way React reads a controlled field: through the native
  * value setter (React installs its own property descriptor on the element, so
  * a plain assignment skips the change listener) followed by an input event.
+ * Wrapped in act() because the setState it triggers must flush before the
+ * caller asserts.
  */
 function setInputValue(input: HTMLInputElement, text: string): void {
   const native = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set
-  if (native !== undefined) native.call(input, text)
-  else input.value = text
-  input.dispatchEvent(new window.Event('input', { bubbles: true }))
+  act(() => {
+    if (native !== undefined) native.call(input, text)
+    else input.value = text
+    input.dispatchEvent(new window.Event('input', { bubbles: true }))
+  })
 }
 
-/** Click one button and let the resulting promise chain settle. */
+/** Click one button and let the resulting promise chain settle.
+ * The component's async action sets state again after its promise resolves,
+ * so the click must stay inside act() until that microtask queue drains —
+ * hence the extra awaited tick rather than a bare synchronous dispatch.
+ */
 async function click(target: HTMLButtonElement): Promise<void> {
   await act(async () => {
     target.dispatchEvent(new window.MouseEvent('click', { bubbles: true }))
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
   })
 }
 

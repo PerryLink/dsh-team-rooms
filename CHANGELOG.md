@@ -9,7 +9,7 @@ All notable changes to this project are documented here. The format follows [Kee
 - **The plugin, extracted.** `dsh-team-rooms` is the team-room half of `dsh-background-agents` 0.9.6 as a standalone package: the `/room` command family, eight `room_*` tools, the `RoomHub` write chain, the delivery cursors, the `teamRoom` session projection, the cross-ecosystem stdio inbound bridge, and the Team Rooms Web settings page. The background-agent half (`background_agent` and the five `bg_*` tools) stays behind — DSH's native continuable subagents cover it.
 - `ARCHITECTURE.md` now documents the room hub, the single write chain, the delivery cursors, the `teamRoom` fold, and the inbound bridge. In `dsh-background-agents` that design existed only in source docstrings.
 - `tests/room-projection.spec.ts` covers the `teamRoom` fold (17 cases) — `src/room/projection.ts` was entirely untested in the source package.
-- `tests/room-presenter.spec.ts` and `tests/team-rooms-section.spec.tsx` cover the client half (the pure presenter and a jsdom render of the settings section) — neither had any test in the source package.
+- `tests/room-presenter.spec.ts` and `tests/team-rooms-section.spec.tsx` cover the client half (the pure presenter and a jsdom render of the settings section) — neither had any test in the source package. The component test drives React through `act()` so state updates flush before each assertion (the suite reports no un-acted updates).
 
 ### Changed
 
