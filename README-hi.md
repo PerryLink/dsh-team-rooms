@@ -73,6 +73,7 @@ dsh --profile web --dump-config | grep -A4 'id: team-rooms'
 - **npm चैनल** (प्रकाशित रिलीज़): `dsh plugin --profile web add dsh-team-rooms`।
 - **tarball चैनल**: इस रिपॉज़िटरी में `pnpm pack`, फिर `dsh plugin --profile web add ./dsh-team-rooms-<version>.tgz`।
 - **अनइंस्टॉल**: `dsh plugin --profile web remove dsh-team-rooms` (या प्रोफ़ाइल पैच से पंक्ति हटाएँ)। आपके रूम `team_rooms` स्टोरेज डोमेन में बने रहते हैं और दोबारा इंस्टॉल करने पर लौट आते हैं।
+- ⚠️ **इसे और `dsh-background-agents` को एक साथ माउंट न करें।** डेप्रिकेशन विंडो के दौरान दोनों प्रकाशित हैं, और दोनों वही आठ `room_*` टूल, वही `settings.section` स्लॉट id (`team-rooms`) और वही `team_rooms` स्टोरेज डोमेन रजिस्टर करते हैं — इसलिए दोनों रूम हिस्से टकराते हैं। यदि आप पहले से `dsh-background-agents` चला रहे हैं, तो पहले उसे हटाएँ (`dsh plugin --profile web remove dsh-background-agents`)। किसी भी स्थिति में आपके रूम सुरक्षित रहते हैं: वे स्टोरेज डोमेन में रहते हैं, प्लगइन में नहीं।
 
 ## कॉन्फ़िगरेशन
 

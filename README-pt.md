@@ -73,6 +73,7 @@ Cole o id de sala impresso em outra sessão e rode `/room join <roomId>`: essa s
 - **canal npm** (versões publicadas): `dsh plugin --profile web add dsh-team-rooms`.
 - **canal tarball**: `pnpm pack` neste repositório e depois `dsh plugin --profile web add ./dsh-team-rooms-<version>.tgz`.
 - **desinstalar**: `dsh plugin --profile web remove dsh-team-rooms` (ou remova a linha do patch do perfil). Suas salas permanecem no domínio de armazenamento `team_rooms` e voltam se você reinstalar.
+- ⚠️ **Não monte este pacote e o `dsh-background-agents` ao mesmo tempo.** Durante a janela de depreciação ambos estão publicados, e os dois registram as mesmas oito ferramentas `room_*`, o mesmo id de slot `settings.section` (`team-rooms`) e o mesmo domínio de armazenamento `team_rooms`, então as duas metades de salas colidem. Se você já usa `dsh-background-agents`, remova-o primeiro (`dsh plugin --profile web remove dsh-background-agents`). Suas salas sobrevivem de qualquer forma: elas vivem no domínio de armazenamento, não no plugin.
 
 ## Configuração
 

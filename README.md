@@ -73,6 +73,7 @@ Paste the printed room id into another session and `/room join <roomId>` — tha
 - **npm channel** (published releases): `dsh plugin --profile web add dsh-team-rooms`.
 - **tarball channel**: `pnpm pack` in this repo, then `dsh plugin --profile web add ./dsh-team-rooms-<version>.tgz`.
 - **uninstall**: `dsh plugin --profile web remove dsh-team-rooms` (or remove the row from the profile patch). Your rooms stay in the `team_rooms` storage domain and come back if you reinstall.
+- ⚠️ **Do not mount this and `dsh-background-agents` at the same time.** While the deprecation window is open both packages are published, and both register the same eight `room_*` tools, the same `settings.section` slot id (`team-rooms`) and the same `team_rooms` storage domain — so the two room halves collide. If you already run `dsh-background-agents`, remove it first (`dsh plugin --profile web remove dsh-background-agents`). Your rooms survive either way: they live in the storage domain, not in the plugin.
 
 ## Configuration
 

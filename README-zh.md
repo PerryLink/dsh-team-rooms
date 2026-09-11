@@ -73,6 +73,7 @@ bundle 补丁带有插件行；没有任何必填 Config 键。仓库提交了�
 - **npm 渠道**（已发布版本）：`dsh plugin --profile web add dsh-team-rooms`。
 - **tarball 渠道**：在本仓库执行 `pnpm pack`，然后 `dsh plugin --profile web add ./dsh-team-rooms-<version>.tgz`。
 - **卸载**：`dsh plugin --profile web remove dsh-team-rooms`（或从 profile 补丁中删除该行）。你的房间仍留在 `team_rooms` 存储域中，重新安装即可回来。
+- ⚠️ **不要与 `dsh-background-agents` 同时挂载。** 废弃窗口期内两个包都在发布，而它们注册的是同样的八个 `room_*` 工具、同一个 `settings.section` 槽位 id（`team-rooms`）与同一个 `team_rooms` 存储域 —— 两个 room 半边会互相冲突。若你已在运行 `dsh-background-agents`，请先卸载它（`dsh plugin --profile web remove dsh-background-agents`）。无论哪种情况房间都不会丢：它们存在存储域里，不在插件里。
 
 ## 配置
 
