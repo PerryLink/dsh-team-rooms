@@ -235,7 +235,7 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 | **[dsh-session-sync](https://github.com/PerryLink/dsh-session-sync)** | DeepSeek Harness के लिए क्रॉस-डिवाइस सेशन सिंक — आपके सेशन स्टोर का समर्पित git मिरर | |
 | **[dsh-skill-pack-security](https://github.com/PerryLink/dsh-skill-pack-security)** | सुरक्षा-ऑडिट स्किल पैक: सीक्रेट स्कैन, निर्भरता और सप्लाई-चेन समीक्षा | |
 | **[dsh-talk](https://github.com/PerryLink/dsh-talk)** | DeepSeek Harness के लिए वॉइस-फ़र्स्ट सेशन लूप: बोलिए और जवाब सुनिए | |
-| **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | DeepSeek Harness प्लगइन के लिए पृथक इंस्टॉल-�और-स्मोक टेस्ट ड्राइव | |
+| **[dsh-test-drive](https://github.com/PerryLink/dsh-test-drive)** | DeepSeek Harness प्लगइन के लिए पृथक इंस्टॉल-और-स्मोक टेस्ट ड्राइव | |
 | **[dsh-ticktick](https://github.com/PerryLink/dsh-ticktick)** | TickTick/Dida365 कार्य ब्रिज: सेशन-हेडर पैनल + 11 टूल | |
 | **[dsh-translate](https://github.com/PerryLink/dsh-translate)** | DeepSeek Harness के लिए विक्रेता पैरामीटर अनुवाद और नियतात्मक JSON मरम्मत | |
 
