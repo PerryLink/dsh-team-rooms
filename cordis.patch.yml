@@ -17,7 +17,7 @@
 # Configure the room limits per profile by overriding the `team-rooms` row.
 #
 # Install (lib/ is committed, so no build step or allowBuilds is needed):
-#   dsh plugin --profile <name> add "github:PerryLink/dsh-team-rooms#v1.0.0"
+#   dsh plugin --profile <name> add "github:PerryLink/dsh-team-rooms#v1.0.1"
 - insert:
     - id: team-rooms
       name: dsh-team-rooms
