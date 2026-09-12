@@ -23,9 +23,10 @@
  */
 
 import { afterEach, describe, expect, it } from 'vitest'
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { Context } from '@deepseek-ai/cordis'
 import AgentLoop from '@deepseek-ai/dsh-agent-loop'
 import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
@@ -45,11 +46,21 @@ import type { TeamRoomFact } from '../src/room/events.ts'
 import type { BusMessage, RoomRecord, TaskRecord, TimelineEvent } from '../src/room/schema.ts'
 
 // ── the 0.9.6 fixture source (read-only, never written) ──────────────────────
-const OLD_ROOT = 'D:/Projects/dsh/plugins/dsh-background-agents'
-const oldDomain = await import(`${OLD_ROOT}/src/room/domain.ts`) as {
+// The 0.9.6 source lives in the sibling repository, which CI does not check out.
+// Resolve it relatively (overridable with DSH_BACKGROUND_AGENTS_ROOT) and skip
+// the suite when it is absent, instead of pinning one developer's absolute path
+// — an absolute path here made every CI run fail with ERR_MODULE_NOT_FOUND.
+const OLD_ROOT = process.env.DSH_BACKGROUND_AGENTS_ROOT
+  ?? resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', 'dsh-background-agents')
+const oldFixtureAvailable = existsSync(join(OLD_ROOT, 'src/room/domain.ts'))
+const oldDomain = (oldFixtureAvailable
+  ? await import(`${OLD_ROOT}/src/room/domain.ts`)
+  : { teamRoomsDomainSpec: undefined }) as {
   teamRoomsDomainSpec: typeof teamRoomsDomainSpec
 }
-const oldProjection = await import(`${OLD_ROOT}/src/room/projection.ts`) as {
+const oldProjection = (oldFixtureAvailable
+  ? await import(`${OLD_ROOT}/src/room/projection.ts`)
+  : { teamRoomProjectionDefinition: undefined }) as {
   teamRoomProjectionDefinition: typeof teamRoomProjectionDefinition
 }
 
@@ -146,7 +157,7 @@ async function seedLegacyDomain(root: string): Promise<void> {
   }
 }
 
-describe('keystone identity — the four strings that may never move', () => {
+describe.skipIf(!oldFixtureAvailable)('keystone identity — the four strings that may never move', () => {
   it('opens the same storage domain name, version, and tables as dsh-background-agents 0.9.6', () => {
     expect(teamRoomsDomainSpec.name).toBe('team_rooms')
     expect(teamRoomsDomainSpec.version).toBe(1)
@@ -169,7 +180,7 @@ describe('keystone identity — the four strings that may never move', () => {
   })
 })
 
-describe('must-keep — a 0.9.6 profile survives the swap', () => {
+describe.skipIf(!oldFixtureAvailable)('must-keep — a 0.9.6 profile survives the swap', () => {
   it('/room list still returns the room 0.9.6 wrote, through this package', async () => {
     const root = mkdtempSync(join(tmpdir(), 'dsh-team-rooms-keystone-'))
     roots.push(root)
