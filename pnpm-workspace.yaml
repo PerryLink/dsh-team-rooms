@@ -2,6 +2,11 @@ packages:
   - .
 allowBuilds:
   esbuild: true
+  # koffi arrives transitively with the agent-loop test kit; this repo never
+  # loads it (no subprocess/FFI path in the room code or its tests), so its
+  # native build script is explicitly declined rather than left undecided —
+  # pnpm treats an undecided script as an install error.
+  koffi: false
 minimumReleaseAgeExclude:
   - '@deepseek-ai/*'
   - '@deepseek-ai/cordis@4.0.1'
