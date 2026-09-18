@@ -39,7 +39,7 @@ Delivery is *outside* the mutation chain, on per-room and per-member chains, so 
 Every room message a member's model sees is an official inbox delivery, and therefore a durable `user/message` in that member's own session log:
 
 - a **live** member is woken with `agent.followup(...)`;
-- an **offline** member receives its backlog through `agent.inject(...)` when its session next starts (`catchUp`, mounted on `agent/session-start`).
+- an **offline** member receives its backlog through `agent.inject(...)` when its session next starts (`catchUp`, mounted on `agent/created`). That event is a **serial** waterfall — the agent registry awaits every listener before registration completes — so the listener decides synchronously (source filter + in-memory membership) and hands the store work to a microtask; a slow or failing store degrades the catch-up, never agent creation.
 
 Both directions use `createUserMessage({ source: { kind: 'plugin', plugin: PLUGIN, form: 'notice' } })`, so a room delivery is attributable and replayable. This is the same discipline the background-agent half used for its progress lines, applied to a shared object.
 
