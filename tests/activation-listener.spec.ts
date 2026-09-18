@@ -141,3 +141,36 @@ describe('agent/created activation listener (A1)', () => {
     expect(spy).not.toHaveBeenCalled()
   })
 })
+
+describe('member brief idempotency (P1-2)', () => {
+  it('injects the brief once across a join and a later activation catch-up', async () => {
+    const { ctx, parent } = await setupWorking()
+    const inject = vi.spyOn(parent as unknown as { inject: (message: unknown) => void }, 'inject')
+    await createRoom(ctx, parent, 'alpha')
+    expect(inject).toHaveBeenCalledTimes(1)
+    // A resume activation re-runs the catch-up for the same live session; the
+    // brief must not land twice in one conversation.
+    await ctx.parallel('agent/created', { agent: parent, source: 'resume' } as never)
+    await flush()
+    expect(inject).toHaveBeenCalledTimes(1)
+    inject.mockRestore()
+  })
+
+  it('injects the brief again after the member leaves and re-joins', async () => {
+    const { ctx, parent } = await setupWorking()
+    const roomId = await createRoom(ctx, parent, 'alpha')
+    // A second member exercises the real leave path (an owner leaving the last
+    // slot deletes the room instead).
+    const peer = await ctx.agentLoop.create(SessionId('peer'), { provider: 'mock', model: 'mock' })
+    const inject = vi.spyOn(peer as unknown as { inject: (message: unknown) => void }, 'inject')
+    const join = await ctx.commands.execute(peer as never, `/room join ${roomId}`, [], new AbortController().signal)
+    expect(join?.result.kind).toBe('success')
+    expect(inject).toHaveBeenCalledTimes(1)
+    const leave = await ctx.commands.execute(peer as never, `/room leave ${roomId}`, [], new AbortController().signal)
+    expect(leave?.result.kind).toBe('success')
+    const rejoin = await ctx.commands.execute(peer as never, `/room join ${roomId}`, [], new AbortController().signal)
+    expect(rejoin?.result.kind).toBe('success')
+    expect(inject).toHaveBeenCalledTimes(2)
+    inject.mockRestore()
+  })
+})
