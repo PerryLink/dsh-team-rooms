@@ -17,7 +17,29 @@ export interface SessionListLike {
     id: string
     running?: boolean
     displayTitle?: string
+    /**
+     * Main-view retention counters. The removed `SessionListState.current` used
+     * to name the open conversation; retention is the surviving authority — a
+     * positive `mainView` count marks the session the main view owns.
+     */
+    retainedBy?: { mainView?: number }
   }>
+}
+
+/**
+ * The session the main view currently owns: the first list row retained by the
+ * main view. The removed `SessionListState.current` field used to name the open
+ * conversation; retention is the surviving authority — this mirrors the
+ * upstream `ui-session` derivation
+ * (`publishMain`, packages/client/ui-session/src/client/index.ts:434-449).
+ * @param list - the session-list snapshot.
+ * @returns the retained session id, or undefined when nothing is retained.
+ */
+export function currentSessionIdOf(list: SessionListLike): string | undefined {
+  for (const row of Object.values(list.byId)) {
+    if ((row.retainedBy?.mainView ?? 0) > 0) return row.id
+  }
+  return undefined
 }
 
 /** One member row with the live overlay applied. */

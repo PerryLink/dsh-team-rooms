@@ -25,7 +25,7 @@ import {
   TeamRoomsSection, type TeamRoomsInjected,
 } from './TeamRoomsSection.tsx'
 import {
-  buildRoomPanels, emptyTeamRoomsState, type SessionListLike, type TeamRoomsState,
+  buildRoomPanels, currentSessionIdOf, emptyTeamRoomsState, type SessionListLike, type TeamRoomsState,
 } from './room-presenter.ts'
 import { en as roomEn, zh as roomZh, ROOM_NS, type TeamRoomsKey } from './room-locales.ts'
 import type {} from '@deepseek-ai/dsh-client-locale/client'
@@ -105,10 +105,12 @@ class TeamRoomsController implements ObservableSnapshot<TeamRoomsState> {
   }
 
   private refresh(): void {
-    const list = this.sessions.list.getSnapshot() as unknown as {
-      current?: string
-    } & SessionListLike
-    const current = list.current
+    // `SessionListState.current` was removed on the 0.1.6 line; the current
+    // conversation is the session the main view retains (the upstream
+    // ui-session derivation). Guard: no retained session ⇒ the panel keeps its
+    // explicit "no active session" state instead of an empty room list.
+    const list = this.sessions.list.getSnapshot() as unknown as SessionListLike
+    const current = currentSessionIdOf(list)
     // Re-bind the projection face when the current session changes.
     if (current !== this.boundSessionId) {
       this.stopFace?.()

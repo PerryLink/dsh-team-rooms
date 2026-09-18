@@ -9,7 +9,7 @@
 
 import { describe, expect, it } from 'vitest'
 import {
-  buildRoomPanels, emptyTeamRoomsState, type SessionListLike,
+  buildRoomPanels, currentSessionIdOf, emptyTeamRoomsState, type SessionListLike,
 } from '../src/client/room-presenter.ts'
 import type { TeamRoomView } from '../src/room/schema.ts'
 
@@ -141,5 +141,39 @@ describe('buildRoomPanels — the timeline window', () => {
 describe('emptyTeamRoomsState', () => {
   it('is a ready state with no session and no rooms', () => {
     expect(emptyTeamRoomsState()).toEqual({ status: 'ready', rooms: [] })
+  })
+})
+
+describe('currentSessionIdOf — the B5 main-view retention derivation', () => {
+  it('returns undefined for an empty list', () => {
+    expect(currentSessionIdOf({ byId: {} })).toBeUndefined()
+  })
+
+  it('returns undefined when no row is retained by the main view', () => {
+    // The removed `SessionListState.current` used to carry this; without a
+    // retention count there is no open conversation to bind the panel to.
+    expect(currentSessionIdOf({ byId: { 's-1': { id: 's-1', running: true } } })).toBeUndefined()
+  })
+
+  it('returns the row the main view retains', () => {
+    const list: SessionListLike = {
+      byId: {
+        's-1': { id: 's-1', retainedBy: { mainView: 0 } },
+        's-2': { id: 's-2', retainedBy: { mainView: 1 } },
+        's-3': { id: 's-3', retainedBy: { mainView: 2 } },
+      },
+    }
+    expect(currentSessionIdOf(list)).toBe('s-2')
+  })
+
+  it('ignores a negative or missing retention count', () => {
+    const list: SessionListLike = {
+      byId: {
+        's-1': { id: 's-1', retainedBy: { mainView: -1 } },
+        's-2': { id: 's-2' },
+        's-3': { id: 's-3', retainedBy: { mainView: 1 } },
+      },
+    }
+    expect(currentSessionIdOf(list)).toBe('s-3')
   })
 })
