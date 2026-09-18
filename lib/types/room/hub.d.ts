@@ -93,6 +93,12 @@ export declare class RoomHub extends Service {
     private readonly roomChains;
     /** Per-member delivery chains: live delivery and catch-up never interleave. */
     private readonly memberChains;
+    /**
+     * (session → room ids) that already received the member brief in this
+     * process, so join + activation cannot inject the same brief twice into one
+     * conversation; leaving or deleting the room clears the record.
+     */
+    private readonly briefed;
     /** Resolves once the storage domain is open (or failed); gates every operation. */
     private readonly ready;
     private readyResolve;
@@ -205,6 +211,11 @@ export declare class RoomHub extends Service {
      * member's model sees exactly what the member's log records.
      */
     injectBrief(sessionId: SessionId, room: RoomRecord): void;
+    /**
+     * Forget one briefed (session, room) pair: called when a member leaves or a
+     * room is deleted, so a later re-join injects the brief again.
+     */
+    private forgetBrief;
     /** Build the minimal brief paragraph for one room. */
     briefText(room: RoomRecord): string;
     /**

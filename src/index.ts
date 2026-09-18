@@ -218,7 +218,14 @@ export function apply(ctx: Context, config: Config): void {
     // (source filter + in-memory membership), hands the real work to a
     // microtask, and swallows its own failures: a failed catch-up is a room
     // feature degrading, never a broken session.
-    roomCtx.on('agent/created', ({ agent, source, signal }) => {
+    //
+    // `source` and `signal` were added to the payload after the peer floor, so
+    // they are read structurally: the published-line type face declares only
+    // `{ agent }`, and both faces must compile.
+    roomCtx.on('agent/created', (payload) => {
+      const agent = payload.agent
+      const source = (payload as { source?: string }).source
+      const signal = (payload as { signal?: AbortSignal }).signal
       try {
         // `clear`/`compact` reuse a live session whose catch-up already ran;
         // only a fresh start or a resume owes the member its backlog.

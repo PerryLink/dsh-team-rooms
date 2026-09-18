@@ -235,19 +235,47 @@ function capDoneTasks(room: RoomView): RoomView {
   }
 }
 
+/** The registry's own `stateSchema` slot type for this projection unit. */
+type RegistryStateSchema = ProjectionDefinition<'teamRoom', State>['stateSchema']
+/** The registry's own `wire.viewSchema` slot type for this unit. */
+type RegistryViewSchema = NonNullable<ProjectionDefinition<'teamRoom', State>['wire']>['viewSchema']
+
+/**
+ * Bridge this package's zod-v3 schema into the registry's schema slot.
+ *
+ * The alpha.2 `@deepseek-ai/dsh-session-projection` types `stateSchema` and
+ * `wire.viewSchema` with the zod **v4** copy it depends on (`zod: ^4.4.3`),
+ * while this package builds its schemas with zod v3; the two majors are not
+ * structurally assignable. The registry only ever calls `parse` on these
+ * schemas (verified in the published lib: `def.stateSchema.parse(row.val)` /
+ * `wire.viewSchema.parse(...)`), which both majors implement identically — so
+ * the cast is a deliberate, documented boundary bridge, not a hidden mismatch.
+ * (Same treatment as the sibling `dsh-background-agents` repo.)
+ * @param schema - the zod-v3 schema built by this package.
+ * @returns the same schema, typed for the registry slot.
+ */
+function asRegistryStateSchema(schema: unknown): RegistryStateSchema {
+  return schema as RegistryStateSchema
+}
+
+/** Bridge one zod-v3 schema into the registry's `wire.viewSchema` slot (see above). */
+function asRegistryViewSchema(schema: unknown): RegistryViewSchema {
+  return schema as RegistryViewSchema
+}
+
 /** The registered projection unit. */
 export const teamRoomProjectionDefinition = {
   key: 'teamRoom',
   // The fold state and the wire value share one shape (`{ rooms: RoomView[] }`);
   // only the done-task backlog differs (the state keeps every row, the view caps it).
-  stateSchema: teamRoomViewSchema,
+  stateSchema: asRegistryStateSchema(teamRoomViewSchema),
   init: (): State => ({ rooms: [] }),
   apply(state: State, event: SessionEvent): State {
     if (event.type !== TEAM_ROOM_FACT) return state
     return applyFact(state, event as SessionEvent<typeof TEAM_ROOM_FACT>)
   },
   wire: {
-    viewSchema: teamRoomViewSchema,
+    viewSchema: asRegistryViewSchema(teamRoomViewSchema),
     view: (state): TeamRoomView => ({
       rooms: state.rooms.map(capDoneTasks),
     }),

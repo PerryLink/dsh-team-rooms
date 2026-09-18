@@ -112,6 +112,12 @@ export class RoomHub extends Service {
   private readonly roomChains = new Map<string, Promise<void>>()
   /** Per-member delivery chains: live delivery and catch-up never interleave. */
   private readonly memberChains = new Map<string, Promise<void>>()
+  /**
+   * (session → room ids) that already received the member brief in this
+   * process, so join + activation cannot inject the same brief twice into one
+   * conversation; leaving or deleting the room clears the record.
+   */
+  private readonly briefed = new Map<string, Set<string>>()
 
   /** Resolves once the storage domain is open (or failed); gates every operation. */
   private readonly ready: Promise<void>
@@ -345,6 +351,7 @@ export class RoomHub extends Service {
       if (record.members.length <= 1) {
         await rooms.delete(roomKey(roomId))
         await this.purgeRoom(roomId)
+        this.forgetBrief(sessionId, roomId)
         return undefined
       }
       const event = this.timelineEvent(roomId, record.timelineNext, 'member-left', now, { sessionId })
@@ -355,6 +362,7 @@ export class RoomHub extends Service {
         timelineNext: record.timelineNext + 1,
       }
       await rooms.put(roomKey(roomId), next)
+      this.forgetBrief(sessionId, roomId)
       this.broadcastFact(next, {
         kind: 'member-left', roomId, sessionId, timelineSeq: event.seq,
       })
@@ -372,6 +380,7 @@ export class RoomHub extends Service {
       }
       await this.requireRooms().delete(roomKey(roomId))
       await this.purgeRoom(roomId)
+      for (const member of record.members) this.forgetBrief(member.sessionId, roomId)
     })
   }
 
@@ -592,6 +601,16 @@ export class RoomHub extends Service {
     if (!this.config.injectRoomBrief) return
     const agent = this.agents.get(sessionId)
     if (agent === undefined) return
+    // Idempotent per live process: a member that joins a room and then hits the
+    // activation path (or a second catch-up) must not receive the same brief
+    // twice in one conversation. Leaving the room — or the room going away —
+    // clears the record so a re-join injects again, and a process restart
+    // (a resumed session in a new host) injects again by construction.
+    const key = String(sessionId)
+    const rooms = this.briefed.get(key)
+    if (rooms?.has(room.roomId) === true) return
+    if (rooms === undefined) this.briefed.set(key, new Set([room.roomId]))
+    else rooms.add(room.roomId)
     agent.inject(createUserMessage({
       content: [{ type: 'text', text: this.briefText(room) }],
       source: {
@@ -601,6 +620,14 @@ export class RoomHub extends Service {
         summary: boundContextSummary(`team room ${room.name}`),
       },
     }))
+  }
+
+  /**
+   * Forget one briefed (session, room) pair: called when a member leaves or a
+   * room is deleted, so a later re-join injects the brief again.
+   */
+  private forgetBrief(sessionId: string, roomId: string): void {
+    this.briefed.get(String(sessionId))?.delete(roomId)
   }
 
   /** Build the minimal brief paragraph for one room. */
