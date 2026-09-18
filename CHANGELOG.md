@@ -4,9 +4,16 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Fixed
+
+- The team-room panel binds to the session the main view retains again. The removed `SessionListState.current` field left the client reading `undefined`, so the settings page showed its "no active session" state forever even with a conversation open; the controller now derives the open session from the main-view retention count (the upstream `ui-session` derivation). The panel keeps an explicit no-session state when nothing is retained.
+
+- The offline catch-up listener no longer runs inside the agent-creation critical path. `agent/created` is a serial waterfall: the registry awaits every listener before it finishes registering the agent, so the previous `async` listener made every agent creation wait on room-store I/O (and a stuck store could block it indefinitely). The listener now decides synchronously — `source` filter (`clear`/`compact` skip) plus an in-memory membership pre-check — and hands the store work to a microtask; its own failures are logged, never propagated.
+
 ### Changed
 
-- Move the room catch-up listener from the removed `agent/session-start` event to `agent/created` (the 0.1.6-alpha.1 checkout renamed the lifecycle event and added `source` to its payload).
+- Move the room catch-up listener from the removed `agent/session-start` event to `agent/created` (the 0.1.6-alpha.1 checkout renamed the lifecycle event and added `source` to its payload). `ARCHITECTURE.md` now records the serial contract alongside the event name.
+- Declare `dsh.manifestVersion: 1` and the canonical three-clause `engines.dsh` range.
 
 ## [1.0.1] - 2026-09-12
 
