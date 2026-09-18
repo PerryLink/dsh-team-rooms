@@ -210,10 +210,31 @@ export function apply(ctx: Context, config: Config): void {
 
     // Offline catch-up: whenever a member session starts (fresh or resume),
     // replay the facts and bus messages it missed, in store order.
-    roomCtx.on('agent/created', async ({ agent }) => {
-      await hub.catchUp(agent.id).catch((error: unknown) => {
-        roomCtx.logger('team-rooms').warn(`room catch-up failed for ${agent.id}: ${String(error)}`)
-      })
+    //
+    // `agent/created` is a SERIAL waterfall: the registry awaits every listener
+    // before it finishes registering the agent, so this listener must never
+    // return a promise that waits on store I/O — a slow or stuck store would
+    // block agent creation. The listener therefore decides synchronously
+    // (source filter + in-memory membership), hands the real work to a
+    // microtask, and swallows its own failures: a failed catch-up is a room
+    // feature degrading, never a broken session.
+    roomCtx.on('agent/created', ({ agent, source, signal }) => {
+      try {
+        // `clear`/`compact` reuse a live session whose catch-up already ran;
+        // only a fresh start or a resume owes the member its backlog.
+        if (source === 'clear' || source === 'compact') return undefined
+        if (!hub.hasMember(agent.id)) return undefined
+        queueMicrotask(() => {
+          if (signal?.aborted === true) return
+          void hub.catchUp(agent.id).catch((error: unknown) => {
+            roomCtx.logger('team-rooms').warn(`room catch-up failed for ${agent.id}: ${String(error)}`)
+          })
+        })
+      } catch (error) {
+        // A synchronous decision failure must not abort agent creation.
+        roomCtx.logger('team-rooms').warn(`room catch-up dispatch failed for ${agent.id}: ${String(error)}`)
+      }
+      return undefined
     })
 
     // Cross-ecosystem inbound (P2): spawn the external runtime and map its

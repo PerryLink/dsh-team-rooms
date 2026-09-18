@@ -235,6 +235,23 @@ export class RoomHub extends Service {
     return room.members.find(member => member.sessionId === sessionId)
   }
 
+  /**
+   * Whether any open room lists this session as a member. Synchronous and
+   * allocation-free so the `agent/created` activation listener can pre-filter
+   * before it dispatches any store work; `false` while the store is not open
+   * yet (room creation and joining re-check the store on their own paths, and
+   * a session that joins a room later is caught up by the join path itself).
+   * @param sessionId - the session to look up.
+   * @returns true when at least one room has this session as a member.
+   */
+  hasMember(sessionId: SessionId): boolean {
+    if (this.rooms === undefined) return false
+    for (const [, record] of this.rooms.entries()) {
+      if (this.memberOf(record, sessionId) !== undefined) return true
+    }
+    return false
+  }
+
   // ── mutations (all queued on the single write chain) ────────────────────────
 
   /**
