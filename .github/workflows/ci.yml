@@ -58,6 +58,8 @@ jobs:
           DSH_HARNESS_ROOT=/tmp/dsh-harness pnpm run gen-aliases
       - name: Typecheck
         run: pnpm run typecheck
+      - name: Typecheck (published line)
+        run: pnpm run typecheck:ci
       # `tests/completeness.spec.ts` asserts over the packaged faces
       # (`lib/index.js`, `lib/client.js`), so the bundles must exist before any
       # vitest step runs. The build-drift gate below still rebuilds and diffs
