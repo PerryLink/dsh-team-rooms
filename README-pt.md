@@ -205,7 +205,7 @@ pnpm run gen-aliases  # remapeia os caminhos do harness depois que o checkout se
 
 ## Família de Plugins DSH PerryLink
 
-Este projeto é um dos [36 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajuda você, os outros provavelmente também:
+Este projeto é um dos [41 plugins do DeepSeek Harness](https://github.com/PerryLink) mantidos por [PerryLink](https://github.com/PerryLink). Se este ajuda você, os outros provavelmente também:
 
 | Plugin | Uma linha |
 |---|---|

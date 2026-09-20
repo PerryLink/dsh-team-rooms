@@ -205,7 +205,7 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [36 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [41 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
 
 | प्लगइन | एक पंक्ति |
 |---|---|

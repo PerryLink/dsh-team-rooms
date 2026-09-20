@@ -205,7 +205,7 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [40 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [41 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
 
 | 插件 | 一句话 |
 |---|---|

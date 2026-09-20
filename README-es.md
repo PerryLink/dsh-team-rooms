@@ -205,7 +205,7 @@ pnpm run gen-aliases  # vuelve a mapear las rutas del harness si el checkout se 
 
 ## Familia de plugins DSH de PerryLink
 
-Este proyecto es uno de los [40 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, los otros probablemente también:
+Este proyecto es uno de los [41 plugins de DeepSeek Harness](https://github.com/PerryLink) mantenidos por [PerryLink](https://github.com/PerryLink). Si este te ayuda, los otros probablemente también:
 
 | Plugin | Una línea |
 |---|---|
