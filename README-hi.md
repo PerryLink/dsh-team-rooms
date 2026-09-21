@@ -206,7 +206,7 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 
 ## PerryLink DSH प्लगइन परिवार
 
-यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [41 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
+यह प्रोजेक्ट [PerryLink](https://github.com/PerryLink) द्वारा अनुरक्षित [42 DeepSeek Harness प्लगइन](https://github.com/PerryLink) में से एक है। अगर यह उपयोगी लगा, तो बाकी भी लगेंगे:
 
 | प्लगइन | एक पंक्ति |
 |---|---|
@@ -256,6 +256,7 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Zero-dependency static portal rendering the whole plugin family as one page | |
 | **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
 | **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH bridge (Tencent iLink bot) developed with [pan17](https://github.com/pan17/dsh-wechat), who hosts the repo | |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 
 ### DSH Desktop मार्केट से इंस्टॉल करें
 

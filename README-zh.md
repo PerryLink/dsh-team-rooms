@@ -206,7 +206,7 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 
 ## PerryLink DSH 插件家族
 
-本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [41 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
+本项目是 [PerryLink](https://github.com/PerryLink) 维护的 [42 个 DeepSeek Harness 插件](https://github.com/PerryLink) 之一。如果这个对你有用，其他的多半也有用：
 
 | 插件 | 一句话 |
 |---|---|
@@ -256,6 +256,7 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Zero-dependency static portal rendering the whole plugin family as one page | |
 | **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
 | **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH bridge (Tencent iLink bot) developed with [pan17](https://github.com/pan17/dsh-wechat), who hosts the repo | |
+| **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
 
 ### 从 DSH Desktop 市场安装
 
