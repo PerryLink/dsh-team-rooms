@@ -233,7 +233,6 @@ Este proyecto es uno de los [42 plugins de DeepSeek Harness](https://github.com/
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | Exportador de observabilidad OpenTelemetry y Langfuse para DeepSeek Harness | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Cambio de estilo en runtime equivalente a outputStyles de Claude Code | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Reglas declarativas de permiso allow/deny/ask estilo Claude Code con auditoría | |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | Inyector de directivas personales con interruptor en la barra superior (edición framework) | |
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | Base de conocimiento de desarrollo de plugins como skill bajo demanda | |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | Puente multicanal de aprobaciones/preguntas: WeChat/Telegram/Feishu, consola de sesión | |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | Motor de informes de investigación verificables: libro de evidencias direccionado por contenido y versiones selladas | |
@@ -254,9 +253,8 @@ Este proyecto es uno de los [42 plugins de DeepSeek Harness](https://github.com/
 | **[dsh-plugin-doctor](https://github.com/PerryLink/dsh-plugin-doctor)** | Zero-dependency static + sandbox smoke detector for DSH plugins | |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Shared zero-runtime-dependency toolkit for the PerryLink DSH plugins | |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Zero-dependency static portal rendering the whole plugin family as one page | |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH bridge (Tencent iLink bot) developed with [pan17](https://github.com/pan17/dsh-wechat), who hosts the repo | |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ### Instalar desde el mercado de DSH Desktop
 

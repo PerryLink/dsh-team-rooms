@@ -233,7 +233,6 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | DeepSeek Harness 的 OpenTelemetry 与 Langfuse 可观测导出 | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Claude Code outputStyles 等价的运行时风格切换 | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Claude Code 风格的声明式 allow/deny/ask 权限规则与审计 | |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | 个人指令注入器，带顶栏开关（框架版） | |
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | 按需加载的插件开发知识库技能 | |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | 多渠道审批/提问桥：微信/Telegram/飞书，会话控制台 | |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | 可验证的研究报告引擎：内容寻址证据账本与封存版本 | |
@@ -254,9 +253,8 @@ pnpm run gen-aliases  # checkout 移动后重新映射 harness 包路径
 | **[dsh-plugin-doctor](https://github.com/PerryLink/dsh-plugin-doctor)** | Zero-dependency static + sandbox smoke detector for DSH plugins | |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Shared zero-runtime-dependency toolkit for the PerryLink DSH plugins | |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Zero-dependency static portal rendering the whole plugin family as one page | |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH bridge (Tencent iLink bot) developed with [pan17](https://github.com/pan17/dsh-wechat), who hosts the repo | |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ### 从 DSH Desktop 市场安装
 

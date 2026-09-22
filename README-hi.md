@@ -233,7 +233,6 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 | **[dsh-observe](https://github.com/PerryLink/dsh-observe)** | DeepSeek Harness के लिए OpenTelemetry और Langfuse ऑब्ज़र्वेबिलिटी एक्सपोर्टर | |
 | **[dsh-output-styles](https://github.com/PerryLink/dsh-output-styles)** | Claude Code outputStyles के समकक्ष रनटाइम शैली स्विचिंग | |
 | **[dsh-permission-rules](https://github.com/PerryLink/dsh-permission-rules)** | Claude Code-शैली घोषणात्मक allow/deny/ask अनुमति नियम, ऑडिट के साथ | |
-| **[dsh-personal-directive](https://github.com/PerryLink/dsh-personal-directive)** | टॉप-बार टॉगल के साथ व्यक्तिगत निर्देश इंजेक्टर (framework संस्करण) | |
 | **[dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide)** | माँग पर लोड होने वाला प्लगइन-विकास ज्ञान आधार स्किल | |
 | **[dsh-reach](https://github.com/PerryLink/dsh-reach)** | मल्टी-चैनल अनुमोदन/प्रश्न ब्रिज: WeChat/Telegram/Feishu, सेशन कंसोल | |
 | **[dsh-research-report](https://github.com/PerryLink/dsh-research-report)** | सत्यापनीय शोध-रिपोर्ट इंजन: सामग्री-पता-युक्त प्रमाण बही और सील्ड संस्करण | |
@@ -254,9 +253,8 @@ pnpm run gen-aliases  # checkout खिसकने पर harness पैके�
 | **[dsh-plugin-doctor](https://github.com/PerryLink/dsh-plugin-doctor)** | Zero-dependency static + sandbox smoke detector for DSH plugins | |
 | **[dsh-plugin-kit](https://github.com/PerryLink/dsh-plugin-kit)** | Shared zero-runtime-dependency toolkit for the PerryLink DSH plugins | |
 | **[dsh-plugin-portal](https://github.com/PerryLink/dsh-plugin-portal)** | Zero-dependency static portal rendering the whole plugin family as one page | |
-| **[dsh-plugin-upgrade-015](https://github.com/PerryLink/dsh-plugin-upgrade-015)** | Merged `0.1.3-alpha.1` → `0.1.5-rc.1` upgrade corridor card plus a zero-dependency seam scanner | |
-| **[dsh-wechat](https://github.com/PerryLink/dsh-wechat)** | WeChat ↔ DSH bridge (Tencent iLink bot) developed with [pan17](https://github.com/pan17/dsh-wechat), who hosts the repo | |
 | **[dsh-laya](https://github.com/PerryLink/dsh-laya)** | Laya typed decisions (`noul`/`choice`/`score`) as a first-class Cordis service and model-visible tools | |
+| **[dsh-plugin-upgrade](https://github.com/PerryLink/dsh-plugin-upgrade)** | One-package, one-corridor-index plugin upgrade skill: routes a repository to the matching closed corridor card | |
 
 ### DSH Desktop मार्केट से इंस्टॉल करें
 
