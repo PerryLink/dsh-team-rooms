@@ -36,7 +36,7 @@ Host `0.1.2-alpha.2` and later fails closed on the session event vocabulary, so 
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.1.7-alpha.1` (verified 2026-09-18; dev and runtime pins `0.1.7-alpha.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
+| Harness | DeepSeek Harness `dsh-v0.1.7-alpha.2` (verified 2026-09-18; dev and runtime pins `0.1.7-alpha.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Platforms | All (host tools; the settings page needs the Web client half and the storage-domain capability) |
 | Model | Any (rooms carry no model route — members are ordinary sessions) |
