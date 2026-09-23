@@ -1,6 +1,6 @@
 {
   "name": "dsh-team-rooms",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packageManager": "pnpm@11.7.0",
   "description": "Persistent multi-agent team rooms for DeepSeek Harness: cross-session rooms with a message bus, a shared task board, approval-gated handoffs and a shared timeline that survive DSH restarts. Extracted from dsh-background-agents 0.9.6, whose background-agent half is superseded by native DSH continuable subagents.",
   "repository": {

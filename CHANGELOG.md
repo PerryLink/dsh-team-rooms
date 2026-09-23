@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.2] - 2026-09-23
 
 ### Fixed
 
@@ -10,10 +10,16 @@ All notable changes to this project are documented here. The format follows [Kee
 
 - The offline catch-up listener no longer runs inside the agent-creation critical path. `agent/created` is a serial waterfall: the registry awaits every listener before it finishes registering the agent, so the previous `async` listener made every agent creation wait on room-store I/O (and a stuck store could block it indefinitely). The listener now decides synchronously — `source` filter (`clear`/`compact` skip) plus an in-memory membership pre-check — and hands the store work to a microtask; its own failures are logged, never propagated.
 
+- The room brief notice and the relayed room message no longer fail to type-check on the `0.1.7` line: the host removed the shared `{ kind: 'plugin', plugin }` message-source catch-all from BOTH layers that used to accept it — the type layer (`MessageSourceMap`) and the persistence layer, which refuses a physical row whose source kind is `'plugin'`, so a cast cannot smuggle one past admission. The producer-owned kind is now declared by module augmentation in `src/vocabulary.ts`, the same pattern the host's own producers use, and used at both write sites. The declaration is byte-identical to the one `dsh-background-agents` makes, because the room half writes under the same historical producer tag (`SOURCE_KIND = PLUGIN = 'dsh-background-agents'`) — splitting one logical producer across two strings in stored logs would be worse than the duplication. The `presentationMeta.plugin` tag on the room tools' `tool/result` rows is untouched: that is a different vocabulary and still uses the historical literal for stored-log continuity.
+
 ### Changed
 
+- Move the `@deepseek-ai/dsh-*` dev/test pins to `0.1.7-alpha.2` and re-verify both rulers against that line.
+- Every declared host range — `engines.dsh` and the eight `peerDependencies` bands — gains the `|| >=0.1.7-0 <0.2.0` arm, so the bands now admit the `0.1.7` prerelease line. Under semver's prerelease rule a range whose only prerelease comparators sit on earlier version tuples cannot admit a later alpha, so the previous three-clause form excluded the very host this release targets. No existing arm was removed or narrowed.
+- `dshWorkshop.compatibility.dshVersions` gains `0.1.7-alpha.2`, and all five READMEs name the verified line.
+- The compat workflow now installs the `0.1.7-alpha.2` host instead of `0.1.6-alpha.2`, so the scheduled end-to-end run exercises the line this package declares.
 - Move the room catch-up listener from the removed `agent/session-start` event to `agent/created` (the 0.1.6-alpha.1 checkout renamed the lifecycle event and added `source` to its payload). `ARCHITECTURE.md` now records the serial contract alongside the event name.
-- Declare `dsh.manifestVersion: 1` and the canonical three-clause `engines.dsh` range.
+- Declare `dsh.manifestVersion: 1` and the canonical `engines.dsh` range.
 
 ## [1.0.1] - 2026-09-12
 
