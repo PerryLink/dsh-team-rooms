@@ -35,7 +35,7 @@ O host `0.1.2-alpha.2` e posteriores falham fechado no vocabulário de eventos d
 
 | Superfície | Estado |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.1.7-alpha.2` (verificado em 2026-09-18; dev e runtime fixam `0.1.7-alpha.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
+| Harness | DeepSeek Harness `dsh-v0.1.7-rc.1` (verificado em 2026-09-24; dev e runtime fixam `0.1.7-rc.1`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Plataformas | Todas (ferramentas de host; a página de configurações precisa da metade cliente Web e da capacidade de domínio de armazenamento) |
 | Modelo | Qualquer (salas não carregam rota de modelo — membros são sessões comuns) |
