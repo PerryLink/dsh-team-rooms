@@ -35,7 +35,7 @@ El host `0.1.2-alpha.2` y posteriores fallan cerrado ante el vocabulario de even
 
 | Superficie | Estado |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.1.7-rc.1` (verificado el 2026-09-24; dev y runtime fijan `0.1.7-rc.1`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
+| Harness | DeepSeek Harness `dsh-v0.1.7-rc.2` (verificado el 2026-09-25; dev y runtime fijan `0.1.7-rc.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Plataformas | Todas (herramientas de host; la página de ajustes necesita la mitad cliente Web y la capacidad de dominio de almacenamiento) |
 | Modelo | Cualquiera (las salas no llevan ruta de modelo — los miembros son sesiones ordinarias) |
