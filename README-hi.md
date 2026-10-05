@@ -19,9 +19,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/dsh-team-rooms)](https://www.npmjs.com/package/dsh-team-rooms)
 [![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-team-rooms?metric=downloads&lang=hi)](https://dshfind.com/hi/plugins/PerryLink/dsh-team-rooms?ref=badge)
 
-> 🪦 **सेवानिवृत्त — 2026-10-05 से संगतता अद्यतन बंद।** टीम समन्वय अब **आधिकारिक हार्नेस स्वयं लागू करता है**: `dsh-experimental-agent-team` (साथ में `-tool-agent-team`) अंतर्निहित-रूट रोस्टर, **टिकाऊ पीयर मेलबॉक्स** और compare-and-set अद्यतनों वाला साझा **टास्क DAG**, तथा Web प्रोजेक्शन देता है। **समुदाय के विकल्प** भी व्यापक रूप से अपनाए गए हैं — जैसे `@nanmicoder/dsh-agent-teams` (~13 हज़ार साप्ताहिक डाउनलोड)। इस पैकेज की एकमात्र विशिष्ट क्षमता **अलग प्रक्रियाओं में स्वतंत्र सत्रों** का समन्वय थी; एक नेटिव उपप्रणाली और कई मज़बूत विकल्पों के सामने 589 साप्ताहिक डाउनलोड वाला यह स्थान संगतता-रखरखाव को न्यायसंगत नहीं ठहराता। 👉 **कृपया नेटिव Agent Teams, या अधिक अपनाया गया विकल्प उपयोग करें।** यह रिपॉज़िटरी संदर्भ हेतु सार्वजनिक है।
-
-[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+> 🪦 **सेवानिवृत्त — 2026-10-05 से संगतता अद्यतन बंद।** टीम समन्वय अब **आधिकारिक हार्नेस स्वयं लागू करता है** `dsh-experimental-agent-team` (साथ में `-tool-agent-team`) अंतर्निहित-रूट रोस्टर, **टिकाऊ पीयर मेलबॉक्स** और compare-and-set अद्यतनों वाला साझा **टास्क DAG**, तथा Web प्रोजेक्शन देता है। ⚠️ जारी `dsh-base` बंडल इसे **अक्षम** रखता है — इसे सक्षम करने के लिए प्रोफ़ाइल पैच चाहिए, और वही पैच पुराने continuable-child नियंत्रण नामों को बंद कर देता है। समुदाय के विकल्प भी व्यापक रूप से अपनाए गए हैं — जैसे `@nanmicoder/dsh-agent-teams` (~13 हज़ार साप्ताहिक डाउनलोड); परन्तु 2026-10-05 तक इसके घोषित peers **`0.2.1` लाइन से नीचे समाप्त** होते हैं, इसलिए `0.2.1-alpha.1` पर होस्ट का संगतता गार्ड इसे **छोड़ देता है**, जब तक आप सटीक संस्करण हेतु छूट न जोड़ें।md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 </div>
 
