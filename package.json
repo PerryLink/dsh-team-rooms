@@ -1,6 +1,6 @@
 {
   "name": "dsh-team-rooms",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "packageManager": "pnpm@11.7.0",
   "description": "Persistent multi-agent team rooms for DeepSeek Harness: cross-session rooms with a message bus, a shared task board, approval-gated handoffs and a shared timeline that survive DSH restarts. Extracted from dsh-background-agents 0.9.6, whose background-agent half is superseded by native DSH continuable subagents.",
   "repository": {
@@ -41,6 +41,66 @@
     "THIRD_PARTY_NOTICES.md",
     "LICENSE"
   ],
+  "dsh-plugin-doctor": {
+    "crossPlugin": {
+      "exempt": [
+        {
+          "kind": "service",
+          "name": "roomHub",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_list_rooms",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_post",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_read",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_list_tasks",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_create_task",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_claim_task",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_transfer_task",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        },
+        {
+          "kind": "tool",
+          "name": "room_complete_task",
+          "peer": "dsh-background-agents",
+          "guard": "0.9.14"
+        }
+      ]
+    }
+  },
   "dsh": {
     "manifestVersion": 1,
     "bundle": {

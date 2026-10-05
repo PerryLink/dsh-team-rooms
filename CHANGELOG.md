@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [1.0.6] - 2026-10-05
+
+Documents that this package is safe to mount together with `dsh-background-agents` >= 0.9.14, which now stands its own room half down when `roomHub` is already provided; the previous "do not mount both" warning is replaced with that versioned statement. Adds the versioned five-language interoperability declaration and the reciprocal K14 exemption.
+
 ## [1.0.5] - 2026-10-04
 
 

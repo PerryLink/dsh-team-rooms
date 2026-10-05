@@ -82,7 +82,7 @@ Paste the printed room id into another session and `/room join <roomId>` — tha
 - **npm channel** (published releases): `dsh plugin --profile web add dsh-team-rooms`.
 - **tarball channel**: `pnpm pack` in this repo, then `dsh plugin --profile web add ./dsh-team-rooms-<version>.tgz`.
 - **uninstall**: `dsh plugin --profile web remove dsh-team-rooms` (or remove the row from the profile patch). Your rooms stay in the `team_rooms` storage domain and come back if you reinstall.
-- ⚠️ **Do not mount this and `dsh-background-agents` at the same time.** While the deprecation window is open both packages are published, and both register the same eight `room_*` tools, the same `settings.section` slot id (`team-rooms`) and the same `team_rooms` storage domain — so the two room halves collide. If you already run `dsh-background-agents`, remove it first (`dsh plugin --profile web remove dsh-background-agents`). Your rooms survive either way: they live in the storage domain, not in the plugin.
+- ✅ **Safe to mount together with `dsh-background-agents` (≥ 0.9.14).** While the deprecation window was open both packages shipped the same room half — the same eight `room_*` tools, the same `settings.section` slot id (`team-rooms`) and the same `team_rooms` storage domain — and `dsh-background-agents` ≤ 0.9.13 additionally registered the same `roomHub` service key, which Cordis permits exactly once per isolate scope. Since **`dsh-background-agents` 0.9.14** that package carries a first-provider-wins coexistence guard: it checks whether `roomHub` is already provided and, if so, stands its own room half down while its background-agent core keeps running. Either package may therefore be mounted first, and the room half is owned by exactly one of them. **If you run `dsh-background-agents` ≤ 0.9.13, mount only one of the two** — upgrade that package, or remove it (`dsh plugin --profile web remove dsh-background-agents`). Your rooms survive either way: they live in the `team_rooms` storage domain, not in the plugin.
 
 ## Configuration
 
@@ -138,7 +138,7 @@ Hosts whose `Session.append` predates the `ignorable` marker (every released rc 
 |---|---|---|
 | [titanwings/dsh-automation](https://github.com/titanwings/dsh-automation) | Scheduled coding tasks in fresh agent sessions | It owns **when** tasks run (scheduling). This plugin owns the **shared object** several sessions work on — no scheduler seam, no cron. |
 | [YYTbit/dsh-plugin-agent-dashboard](https://github.com/YYTbit/dsh-plugin-agent-dashboard) | Multi-agent dashboard skill | Display-oriented and read-mostly. This plugin's rooms are **writable coordination state**: a bus, a board, and approval-gated handoffs, persisted in the harness's own storage. |
-| `dsh-background-agents` | Background agents plus (previously) team rooms | That package's `bg_*` half is superseded by DSH's native continuable subagents; its room half is this package. Do not mount both room halves at once. |
+| `dsh-background-agents` | Background agents plus (previously) team rooms | That package's `bg_*` half is superseded by DSH's native continuable subagents; its room half is this package. Since `dsh-background-agents` 0.9.14 the two are safe to mount together — that package stands its room half down when `roomHub` is already provided. On ≤ 0.9.13 mount only one room half. |
 
 ## Permissions & data
 
