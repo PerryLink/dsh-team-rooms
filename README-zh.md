@@ -19,7 +19,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/dsh-team-rooms)](https://www.npmjs.com/package/dsh-team-rooms)
 [![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-team-rooms?metric=downloads&lang=zh)](https://dshfind.com/zh/plugins/PerryLink/dsh-team-rooms?ref=badge)
 
-> 🪦 **已退役 —— 自 2026-10-05 起停止兼容性更新。** 团队协作**官方宿主已自行实现** `dsh-experimental-agent-team`（配 `-tool-agent-team`）提供隐式根 roster、**持久对等邮箱**、带 compare-and-set 的共享**任务 DAG**，以及 Web 投影。⚠️ 出厂的 `dsh-base` 组合把它**保持为关闭**状态——需要一份 profile patch 才能启用，同时会关掉旧的 continuable-child 控制名。社区也已有成熟且采用度更高的**替代品**——例如 `@nanmicoder/dsh-agent-teams`（周下载约 1.3 万）；但截至 2026-10-05，它声明的 peer **上限低于 `0.2.1` 线**，因此在 `0.2.1-alpha.1` 上会被宿主的兼容性守卫**直接跳过**，除非你按精确版本加豁免。md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+> 🪦 **已退役 —— 自 2026-10-05 起停止兼容性更新。** 团队协作**官方宿主已自行实现** `dsh-experimental-agent-team`（配 `-tool-agent-team`）提供隐式根 roster、**持久对等邮箱**、带 compare-and-set 的共享**任务 DAG**，以及 Web 投影。⚠️ 出厂的 `dsh-base` 组合把它**保持为关闭**状态——需要一份 profile patch 才能启用，同时会关掉旧的 continuable-child 控制名。社区也有更广泛采用的**社区替代品**——例如 `@nanmicoder/dsh-agent-teams`（周下载约 1.3 万）；但截至 2026-10-05，它声明的 peer **上限低于 `0.2.1` 线**，因此在 `0.2.1-alpha.1` 上会被宿主的兼容性守卫**直接跳过**，除非你按精确版本加豁免。md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
 </div>
 
