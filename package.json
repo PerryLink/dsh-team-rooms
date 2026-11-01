@@ -39,7 +39,12 @@
     "README-hi.md",
     "ARCHITECTURE.md",
     "THIRD_PARTY_NOTICES.md",
-    "LICENSE"
+    "LICENSE",
+    "PRIVACY.md",
+    "icon.svg",
+    "screenshots.json",
+    "docs/assets/dsh-team-rooms-demo.gif",
+    "docs/assets/dsh-team-rooms-hero.png"
   ],
   "dsh-plugin-doctor": {
     "crossPlugin": {
@@ -240,5 +245,6 @@
   "funding": {
     "type": "individual",
     "url": "https://github.com/sponsors/PerryLink"
-  }
+  },
+  "icon": "icon.svg"
 }
