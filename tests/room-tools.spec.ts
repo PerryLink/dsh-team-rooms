@@ -8,7 +8,7 @@ import AgentLoop from '@deepseek-ai/dsh-agent-loop'
 import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
 import CommandRuntime from '@deepseek-ai/dsh-commands'
 import { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
+import * as JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
 import Storage from '@deepseek-ai/dsh-storage'
 import * as StorageJson from '@deepseek-ai/dsh-storage-json'
 import * as StorageDomain from '@deepseek-ai/dsh-storage-domain'
@@ -42,14 +42,16 @@ async function setup(config: Partial<plugin.Config> = {}) {
 }
 
 let calls = 0
-function callTool(ctx: Context, name: string, args: unknown, agent: unknown) {
-  return ctx.tools.execute({
+/** Run one tool call through the batch executor and return its single outcome. */
+async function callTool(ctx: Context, name: string, args: unknown, agent: unknown) {
+  const batch = await ctx.tools.execute({
     signal: testToolSignal,
-    callId: CallId(`call-${++calls}`),
-    name,
-    arguments: args,
+    calls: [{ type: 'tool-call' as const, id: CallId(`call-${++calls}`), name, arguments: JSON.stringify(args) }],
     agent: agent as never,
   })
+  const outcome = batch.results[0]
+  if (outcome === undefined) throw new Error(`tool ${name} produced no result`)
+  return outcome.result
 }
 
 /** Create one room through the real `/room create` command and return its id. */

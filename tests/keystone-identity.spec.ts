@@ -32,7 +32,7 @@ import AgentLoop from '@deepseek-ai/dsh-agent-loop'
 import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
 import CommandRuntime from '@deepseek-ai/dsh-commands'
 import { SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
+import * as JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
 import Storage from '@deepseek-ai/dsh-storage'
 import * as StorageJson from '@deepseek-ai/dsh-storage-json'
 import * as StorageDomain from '@deepseek-ai/dsh-storage-domain'
@@ -215,13 +215,12 @@ describe.skipIf(!oldFixtureAvailable)('must-keep — a 0.9.6 profile survives th
       await ctx.plugin(plugin, { allowUnmarkedFacts: true })
       const member = await ctx.agentLoop.create(SessionId(MEMBER), { provider: 'mock', model: 'mock' })
 
-      const result = await ctx.tools.execute({
+      const batch = await ctx.tools.execute({
         signal: new AbortController().signal,
-        callId: 'keystone-1' as never,
-        name: 'room_list_rooms',
-        arguments: {},
+        calls: [{ type: 'tool-call' as const, id: 'keystone-1' as never, name: 'room_list_rooms', arguments: '{}' }],
         agent: member as never,
       })
+      const result = batch.results[0]!.result
       expect(result.isError).toBe(false)
       const value = result.value as {
         rooms: Array<{ roomId: string; name: string; memberCount: number; openTasks: number; myRole: string }>

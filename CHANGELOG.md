@@ -11,6 +11,16 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Changed
+
+- **Host 0.2.2 line support.** Every `@deepseek-ai/dsh-*` dev/test pin moves from `0.2.1-alpha.1` to `0.2.2-rc.1`; `@deepseek-ai/cordis-plugin-include` and `@deepseek-ai/cordis-plugin-loader` move to `^1.1.0`, `@deepseek-ai/schemastery` to `~3.19.0` so one copy resolves against `@deepseek-ai/dsh-llm` 0.2.2. `@deepseek-ai/cordis` (`^4.1.0`) and `@deepseek-ai/schemastery` become explicit devDependencies: before, they existed only as auto-installed peers, which kept `cordis` 4.0.5 / `schemastery` 3.18 in the local and CI test tree while the host line vendors 4.1.0 / 3.19.0 — the 4.0.5 pairing broke the Loader composition runner (an internal `Cannot read properties of undefined (reading 'entry')` instead of the row's own failure) and the 3.18 copy left the shipped `lib/index.js` importing a schemastery the host does not use. The peer ranges are deliberately unchanged. `engines.dsh` appends `>=0.2.2-0 <0.3.0` (append-only) and `engines.node` becomes `^22.19.0 || >=24.9.0`. `dshWorkshop.compatibility.dshVersions` appends `0.2.2-rc.1`, and `HARNESS_COMMIT` moves to the verified 0.2.2 host commit (`fcc0ad46`), which is the checkout the CI path maps and typechecks against.
+
+### Fixed
+
+- The room tool specs drive `ctx.tools.execute` through the 0.2.2 batch contract (`{ calls: [{ type: 'tool-call', id, name, arguments }], signal, agent }` then `results[0].result`); the old single-call `{ callId, name, arguments }` form no longer type-checks. The stuck-store spec now passes schema-valid arguments and asserts the open-timeout message, so it still proves the timeout path instead of a rejected call.
+- The test stack imports `@deepseek-ai/dsh-session-persistence-jsonl` through its named exports; the 0.2.2 package no longer publishes a default export.
+- Add `@deepseek-ai/dsh-package-manifest`: `@deepseek-ai/dsh-llm` 0.2.2's published types import it without declaring it.
+
 ## [1.0.7] - 2026-10-05
 
 undefined

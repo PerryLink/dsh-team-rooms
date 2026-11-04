@@ -8,7 +8,7 @@ import AgentLoop from '@deepseek-ai/dsh-agent-loop'
 import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
 import CommandRuntime from '@deepseek-ai/dsh-commands'
 import { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
+import * as JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
 import Storage from '@deepseek-ai/dsh-storage'
 import * as StorageJson from '@deepseek-ai/dsh-storage-json'
 import * as plugin from '../src/index.ts'
@@ -58,16 +58,21 @@ describe('room open timeout against a stuck storage provider', () => {
 
   it('settles room_create_task with a closed failure instead of hanging', async () => {
     const { ctx, parent } = await setupWithStuckDomain()
-    const result = await ctx.tools.execute({
+    const batch = await ctx.tools.execute({
       signal: new AbortController().signal,
-      callId: CallId('room-stuck-open-1'),
-      name: 'room_create_task',
-      arguments: { roomId: 'r-1', content: 'x' },
+      calls: [{
+        type: 'tool-call' as const,
+        id: CallId('room-stuck-open-1'),
+        name: 'room_create_task',
+        arguments: JSON.stringify({ room_id: 'r-1', title: 'x' }),
+      }],
       agent: parent as never,
     })
     // The tool must settle (the executor normalizes the plugin's failure),
     // never park on the never-settling domain open.
+    const result = batch.results[0]!.result
     expect(result.isError).toBe(true)
+    expect(result.isError ? result.error.message : '').toContain('did not open within 200 ms')
   })
 
   it('still registers the room tools while the domain is stuck', async () => {
