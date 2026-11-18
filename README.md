@@ -20,7 +20,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/dsh-team-rooms)](https://www.npmjs.com/package/dsh-team-rooms)
 [![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-team-rooms?metric=downloads)](https://dshfind.com/plugins/PerryLink/dsh-team-rooms?ref=badge)
 
-> 🪦 **RETIRED — compatibility updates stopped as of 2026-10-05.** Team coordination is now **implemented by the official harness itself** `dsh-experimental-agent-team` (with `-tool-agent-team`) provides an implicit-root roster, a **durable peer mailbox** and a shared **task DAG** with compare-and-set updates, plus a Web projection. ⚠️ The shipped `dsh-base` bundle keeps it **disabled** — a profile patch enables it and disables the legacy continuable-child control names. Well-adopted **community alternatives** also exist — for example `@nanmicoder/dsh-agent-teams` (~13k weekly downloads), though as of 2026-10-05 its declared peers **stop below the `0.2.1` line**, so the host's compatibility guard **skips** it on `0.2.1-alpha.1` unless you add a per-version exemption. The one thing this package did that the native subsystem does not is coordinate **independent sessions in separate processes**; with 589 weekly downloads against a native subsystem plus several community alternatives, that niche no longer justifies compatibility upkeep. 👉 **Use the native Agent Teams, or a more widely adopted community alternative.** This repository stays public for reference.
+> 🪦 **RETIRED — compatibility updates stopped as of 2026-11-18.** Team coordination is now **implemented by the official harness itself** `dsh-experimental-agent-team` (with `-tool-agent-team`) provides an implicit-root roster, a **durable peer mailbox** and a shared **task DAG** with compare-and-set updates, plus a Web projection. ⚠️ The shipped `dsh-base` bundle keeps it **disabled** — a profile patch enables it and disables the legacy continuable-child control names. Well-adopted **community alternatives** also exist — for example `@nanmicoder/dsh-agent-teams` (~13k weekly downloads), though as of 2026-11-18 its declared peers **stop below the `0.2.1` line**, so the host's compatibility guard **skips** it on `0.2.2-rc.4` unless you add a per-version exemption. The one thing this package did that the native subsystem does not is coordinate **independent sessions in separate processes**; with 589 weekly downloads against a native subsystem plus several community alternatives, that niche no longer justifies compatibility upkeep. 👉 **Use the native Agent Teams, or a more widely adopted community alternative.** This repository stays public for reference.
 
 [English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
 
@@ -38,7 +38,7 @@ Host `0.1.2-alpha.2` and later fails closed on the session event vocabulary, so 
 
 | Surface | Status |
 |---|---|
-| Harness | DeepSeek Harness `dsh-v0.2.1-alpha.1` (verified 2026-09-25; dev and runtime pins `0.1.7-rc.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0`) |
+| Harness | DeepSeek Harness `dsh-v0.2.2-rc.4` (verified 2026-11-18; dev and runtime pins `0.1.7-rc.2`, peers `>=0.1.2-rc.1 <0.2.0 \|\| >=0.1.5-alpha.1 <0.2.0 \|\| >=0.1.6-0 <0.2.0 \|\| >=0.1.7-0 <0.2.0 \|\| >=0.2.2-0 <0.3.0`) |
 | Node | `^22.19.0 \|\| >=24.0.0` |
 | Platforms | All (host tools; the settings page needs the Web client half and the storage-domain capability) |
 | Model | Any (rooms carry no model route — members are ordinary sessions) |
